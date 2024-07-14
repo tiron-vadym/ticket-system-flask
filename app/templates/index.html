@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+</head>
+<body>
+    <h2>Tickets</h2>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <ul>
+        {% for ticket in tickets %}
+            <li>
+                {{ ticket.status }} - {{ ticket.note }}
+                {% if current_user.role.name == 'manager' %}
+                    <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}">Edit</a>
+                    <form action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
+                {% endif %}
+                {% if current_user.role.name == 'analyst' %}
+                    <a href="{{ url_for('edit_ticket', ticket_id=ticket.id) }}">Edit</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% if current_user.role.name == 'manager' %}
+        <a href="{{ url_for('create_ticket') }}">Create Ticket</a>
+    {% endif %}
+</body>
+</html>

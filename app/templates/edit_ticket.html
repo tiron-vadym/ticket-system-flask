@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Ticket</title>
+</head>
+<body>
+    <h2>Edit Ticket</h2>
+    <form method="POST">
+        <p>
+            <label for="status">Status</label><br>
+            <input type="text" id="status" name="status" value="{{ ticket.status }}">
+        </p>
+        <p>
+            <label for="note">Note</label><br>
+            <textarea id="note" name="note">{{ ticket.note }}</textarea>
+        </p>
+        <p>
+            <button type="submit">Update</button>
+        </p>
+    </form>
+</body>
+</html>
